@@ -155,7 +155,7 @@ CREATE TABLE `kaos_varian` (
   `kode_varian` varchar(20) NOT NULL,
   `warna` varchar(50) DEFAULT NULL,
   `warna_hex` varchar(7) DEFAULT '#FFFFFF',
-  `size` enum('XS','S','M','L','XL','2XL','3XL','4XL','5XL') DEFAULT 'L',
+  `size` varchar(20) DEFAULT 'L',
   `harga` decimal(10,2) NOT NULL,
   `harga_pokok` decimal(10,2) NOT NULL DEFAULT 0.00,
   `stok` int(11) NOT NULL DEFAULT 0,
