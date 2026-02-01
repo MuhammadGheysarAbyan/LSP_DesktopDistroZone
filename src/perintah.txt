@@ -1,0 +1,107 @@
+Buatlah aplikasi berbasis web dan berbasis desktop menggunakan JFrame untuk aplikasi kasir toko dengan ketentuan sebagai berikut :
+1.	Jenis Toko : Toko yang menjual kaos-kaos distro
+2.	Deskripsi Toko
+	Nama Toko : DistroZone
+	Alamat Toko : Jln. Raya Pegangsaan Timur No.29H Kelapa Gading Jakarta
+	Deskripsi Toko : Toko ini adalah sebuah toko yang menjual berbagai macam kaos distro dengan berbagai macam model, warna dan ukuran. 
+	DistroZone ini dikelola langsung oleh owner nya yang menjadi admin secara langsung, akan tetapi untuk transaksi penjualan semuanya dilakukan oleh karyawan atau kasir.
+	Secara offline, DistroZone ini buka mulai pukul 10.00 s.d 20.00 dan pada hari senin libur sedangkan untuk transaksi onlinenya DistroZone dapat melayani setiap hari dengan jam operasional 10.00 s.d 17.00 (tanpa hari libur)
+	System pembayaran untuk transaksi offline pada DistroZone ini dapat dilakukan dengan 3 cara, yaitu :
+a.	Tunai / cash
+b.	QRIS
+c.	Transfer Bank
+	Sedangkan untuk pembelian secara online baru dapat dilakukan pengiriman barang apabila sudah terverifikasi pembayaran melalui transfer ke nomer rekening owner dengan ditambah biaya ongkos kirim juga
+3.	Keterangan aplikasi
+Buatlah 2 versi aplikasi, yaitu aplikasi offline (desktop) dan aplikasi online (web), dengan ketentuan sebagai berikut :
+	Aplikasi Offline Based Desktop, dengan ketentuan sebagai berikut :
+1.	User Aplikasi ini adalah :
+a)	Admin
+•	CRUD Karyawan, meliputi : id_karyawan (autogenered), nama, alamat, no._telepon, NIK, foto_karyawan, username, password
+•	Bisa melihat data karyawan dan live search
+•	CRUD Awal Data Kaos, meliputi : id_kaos, merek_kaos, type_kaos (lengan panjang/pendek), warna_kaos, size (XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL), harga_jual, harga_pokok, stok_kaos, foto_kaos
+•	Bisa melihat detail data_kaos
+•	Bisa melihat laporan keuangan, berapa transaksi yang masuk serta ada laporan rugi laba nya dengan periode tertentu (seluruh kasir)
+•	Atur jam operasional
+b)	Kasir 
+•	Bisa melihat data kaos dan live search
+•	Melakukan transaksi penjualan
+•	Melihat laporan keuangan dengan periode tertentu (hanya di akun nya saja)
+2.	System pembayarannya : tunai, QRIS, dan transfer bank
+3.	Ada laporan penjualan dan rugi / laba
+4.	Desain sebaik dan selengkap mungkin, detail program harus tercover
+5.	Setiap transaksi wajib diberikan struk
+	Aplikasi Online Based Web, intinya tidak jauh berbeda dengan versi web, hanya ada tambahan beberapa fitur, antara lain :
+1.	Adanya user customer, dimana user ini bisa melihat stok barang-barang apa saja yang dijual di DistroZone, lengkap dengan detailnya
+2.	Ada layanan customer service yang melayani sesuai dengan jam operasional toko
+3.	Transaksi tidak dapat dilakukan apabila belum ada verifikasi ACC dari kasir
+4.	Ada tambahan biaya ongkos kirim, tiap 1 kg bisa muat 3 kaos, kaos kurang dari 3 pcs tetap di hitung 1 kg, sedangkan tariff nya sebagai berikut :
+WILAYAH	ONGKOS KIRIM/Kg
+Jakarta	24.000,-
+Depok	24.000,-
+Bekasi	25.000,-
+Tangerang	25.000,-
+Bogor	27.000,-
+Seluruh Wilayah Jawa Barat	31.000,-
+Seluruh Wilayah Jawa Tengah	39.000,-
+Seluruh Wilayah Jawa Timur	47.000,-
+5.	Tidak melayani customer diluar pulau
+4.	Buatlah 2 versi aplikasi tersebut dengan akses database terpusat
+
+
+fokus desktop sesuai database dan struktur yang ada
+distrozone_db
+
+USERS
+└── id, user_code, username, password, nama, email, alamat, no_telp, nik, role, shift, foto, status, created_at, updated_at
+
+KATEGORI
+└── id, nama_kategori, slug
+
+KAOS_MASTER
+└── id, nama_kaos, merek, kategori_id, type_kaos, deskripsi, foto_utama, created_at, updated_at
+
+KAOS_VARIAN
+└── id, kaos_master_id, kode_varian, warna, warna_hex, size, harga, harga_pokok, stok, foto_varian, created_at, updated_at
+
+CART
+└── id, customer_id, kaos_id, qty, created_at
+
+TRANSAKSI
+└── id, kode_transaksi, customer_id, kasir_id, total, shipping_city, shipping_address, shipping_cost, grand_total, payment_method, status, cancelled_by, cancel_reason, tanggal, waktu, created_at
+
+DETAIL_TRANSAKSI
+└── id, transaksi_id, kaos_id, qty, harga_jual, harga_modal, subtotal, laba, created_at
+
+PAYMENT_PROOF
+└── id, transaksi_id, customer_id, file_bukti, status, tanggal_upload, verified_by, verified_at
+
+SHIPPING_RATES
+└── id, wilayah, cost_per_kg
+
+SETTINGS
+└── id, setting_key, setting_value
+
+ACTIVITY_LOGS
+└── id, user_id, action, details, ip_address, user_agent, created_at
+
+CHAT_CONVERSATIONS
+└── id, customer_id, status, created_at, updated_at
+
+CHAT_MESSAGES
+└── id, conversation_id, sender_id, sender_role, message, is_read, created_at
+
+
+DistroZone/
+src/
+AdminDashboard.java
+KaosManagement.java
+KaryawanManagement.java
+LaporanKeuangan.java
+PengaturanOperasional.java
+UseFormDialog.java
+KasirDashboard.java
+DaftarKaos.java
+LaporanKasir.java
+TransaksiForm.java
+SplashScreen.java
+LoginForm.java       
